@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AvailableRoutes } from "../../routes/AvailableRoutes";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/auth/apiCalls";
+import { AuthContext } from "../../provider/AuthProvider";
 
 function RegisterForm() {
     const [email, setEmail] = useState<string>("");
@@ -12,6 +13,8 @@ function RegisterForm() {
     const [lastName, setLastName] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    
+    const { saveToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (): Promise<void> => {
@@ -24,9 +27,8 @@ function RegisterForm() {
             password: password
         })
             .then((response) => {
-                localStorage.setItem("Token", response.headers["authorization"])
+                if (saveToken) saveToken(response.headers["authorization"]);
                 navigate(AvailableRoutes.Home)
-                console.log(JSON.stringify(response.headers["authorization"]))
             })
             .catch((error) => {
                 console.log("Error: " + JSON.stringify(error.response.data))

@@ -1,21 +1,18 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Container, Nav, Navbar, Image } from "react-bootstrap";
 import { AuthContext } from "../provider/AuthProvider";
 import NavigationAuthButtons from "./NavigationAuthButtons";
 import NavigationLoggedInButtons from "./NavigationLoggedInButtons";
+import pokeball from "../public/images/pokeball.png";
 
 function Navigation() {
     const { token } = useContext(AuthContext);
-
-    useEffect(() => {
-        console.log(token);
-    }, [token])
 
     return (
         <Navbar collapseOnSelect expand="lg">
             <Container>
                 <Navbar.Brand>
-                    <Image src="src/public/images/pokeball.png" className="pokeball"/>
+                    <Image src={pokeball} className="pokeball"/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
