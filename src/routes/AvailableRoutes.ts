@@ -2,5 +2,6 @@ export enum AvailableRoutes {
     Home = "/",
     Login = "/auth/login",
     Register = "/auth/register",
-    GuessingGame = "/guessing-game/guess"
+    GuessingGame = "/guessing-game/guess",
+    Pokedex = "/user/pokedex"
 }
