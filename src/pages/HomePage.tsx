@@ -1,8 +1,8 @@
 import { Accordion, Card, ListGroup } from "react-bootstrap";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/navigation/Navigation";
 import { useContext } from 'react';
 import { AuthContext } from "../provider/AuthProvider";
-import PlayButton from "../components/PlayButton";
+import PlayButton from "../components/guessingGame/PlayButton";
 
 function HomePage() {
     const { token } = useContext(AuthContext);

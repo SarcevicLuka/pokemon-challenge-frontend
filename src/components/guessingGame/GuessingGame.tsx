@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form } from "react-bootstrap";
-import { getGuessingGamePokemon, takeAGuess } from "../api/guessingGame/apiCalls";
-import Loader from "./Loader";
-import guessThePokemon from "../public/images/guess-the-pokemon.jpg";
-import { getPokedex } from "../api/pokedex/apiCalls";
+import { getGuessingGamePokemon, takeAGuess } from "../../api/guessingGame/apiCalls";
+import Loader from "../Loader";
+import guessThePokemon from "../../public/images/guess-the-pokemon.jpg";
+import { getPokedex } from "../../api/pokedex/apiCalls";
 import FinishGameModal from "./FinishGameModal";
-import { AvailableRoutes } from "../routes/AvailableRoutes";
-import ErrorToast from "./ErrorToast";
+import { AvailableRoutes } from "../../routes/AvailableRoutes";
+import ErrorToast from "../ErrorToast";
 
 export type GuessingGamePokemon = {
     guessId: string,

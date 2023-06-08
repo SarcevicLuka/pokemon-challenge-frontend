@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import PokeballIcon from "../public/PokeballIcon";
+import PokeballIcon from "../../public/PokeballIcon";
 
 function PlayButton() {
     return (

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Container, Nav, Navbar, Image } from "react-bootstrap";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 import NavigationAuthButtons from "./NavigationAuthButtons";
 import NavigationLoggedInButtons from "./NavigationLoggedInButtons";
-import pokeball from "../public/images/pokeball.png";
+import pokeball from "../../public/images/pokeball.png";
 
 function Navigation() {
     const { token } = useContext(AuthContext);

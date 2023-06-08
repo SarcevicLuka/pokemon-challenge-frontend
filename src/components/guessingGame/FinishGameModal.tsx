@@ -1,5 +1,5 @@
 import { Container, Modal } from "react-bootstrap";
-import { AvailableRoutes } from "../routes/AvailableRoutes";
+import { AvailableRoutes } from "../../routes/AvailableRoutes";
 
 interface ModalProps {
     show: boolean,

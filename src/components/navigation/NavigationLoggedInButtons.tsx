@@ -1,8 +1,8 @@
 import { Button, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { AvailableRoutes } from "../routes/AvailableRoutes";
+import { AvailableRoutes } from "../../routes/AvailableRoutes";
 import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 
 function NavigationLoggedInButtons() {
     const { saveToken } = useContext(AuthContext);
