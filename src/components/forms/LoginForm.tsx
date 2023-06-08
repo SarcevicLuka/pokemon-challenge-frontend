@@ -23,11 +23,11 @@ function LoginForm() {
             password: password
         })
             .then((response) => {
+                console.log(response);
                 if (saveToken) saveToken(response.headers["authorization"]);
                 navigate(AvailableRoutes.Home)
             })
             .catch((error) => {
-                console.log("Error: " + JSON.stringify(error.response))
                 switch (error.response.status) {
                     case 400:
                         setError("Bad request")

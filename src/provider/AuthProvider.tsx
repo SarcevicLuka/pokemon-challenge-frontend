@@ -9,14 +9,14 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps>({ token: undefined, saveToken: undefined });
 
 const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
-	const [token, setToken] = useState<string | undefined | null>(localStorage.getItem("token"));
+	const [token, setToken] = useState<string | undefined | null>(sessionStorage.getItem("token"));
 
 	const saveToken = (userToken?: Token): void => {
 		if (userToken) {
-			localStorage.setItem("token", userToken);
+			sessionStorage.setItem("token", userToken);
 			setToken(userToken);
 		} else {
-			localStorage.removeItem("token");
+			sessionStorage.removeItem("token");
 			setToken(undefined);
 		}
 	};
