@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { AvailableRoutes } from "../../routes/AvailableRoutes";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/auth/apiCalls";
 import { AuthContext } from "../../provider/AuthProvider";
+import AvailableRouteLinks from "./AvailableRouteLinks";
 
 function RegisterForm() {
     const [email, setEmail] = useState<string>("");
@@ -100,9 +100,7 @@ function RegisterForm() {
                 </Form>
                 <hr />
             </div>
-            <div className="p-4 box text-center">
-                Already have an account? <Link to={AvailableRoutes.Login}>Log in</Link>
-            </div>
+            <AvailableRouteLinks route={AvailableRoutes.Login} text="Log in" />
         </>
     );
 }

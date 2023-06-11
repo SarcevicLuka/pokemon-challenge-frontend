@@ -4,7 +4,7 @@ import { Button, Card, Form } from "react-bootstrap";
 import { getGuessingGamePokemon, takeAGuess } from "../../api/guessingGame/apiCalls";
 import Loader from "../Loader";
 import guessThePokemon from "../../public/images/guess-the-pokemon.jpg";
-import { getPokedex } from "../../api/pokedex/apiCalls";
+import { getWholePokedex } from "../../api/pokedex/apiCalls";
 import FinishGameModal from "./FinishGameModal";
 import { AvailableRoutes } from "../../routes/AvailableRoutes";
 import ErrorToast from "../ErrorToast";
@@ -24,6 +24,8 @@ const GuessingGame = () => {
     const [numOfCaughtPokemon, setNumOfCaughtPokemon] = useState<number>(0);
     const [numOfNewelyCaughtPokemon, setNumOfNewelyCaughtPokemon] = useState<number>(0);
     const [error, setError] = useState<string>("");
+    const [requiredError, setRequiredError] = useState<string>("");
+    const [guessesLeft, setGuessesLeft] = useState<number>(2);
 
     const navigation = useNavigate();
 
@@ -45,7 +47,7 @@ const GuessingGame = () => {
                         setError("Not authorized")
                         break;
                     case 422:
-                        setError("Required")
+                        setRequiredError("Required")
                         break;
                     default:
                         setError("Something went wrong")
@@ -64,14 +66,22 @@ const GuessingGame = () => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 if (response.status == 200 && response.data.verdict === "correct") {
                     setIsCorrect(true);
                     setNumOfCaughtPokemon(numOfCaughtPokemon + 1)
                     setNumOfNewelyCaughtPokemon(numOfNewelyCaughtPokemon + 1)
                     getPokemon();
+                    setGuessesLeft(2);
                 } else {
-                    setIsCorrect(false);
+                    if (guessesLeft > 0) {
+                        console.log(guessesLeft);
+                        setIsCorrect(false);
+                        setGuessesLeft(prev => prev - 1)
+                    } else {
+                        console.log(guessesLeft);
+                        getPokemon();
+                        setGuessesLeft(2);
+                    }
                 }
             })
             .catch((error) => {
@@ -85,7 +95,7 @@ const GuessingGame = () => {
                         navigation(AvailableRoutes.Home)
                         break;
                     case 422:
-                        setError("Required")
+                        setRequiredError("Required")
                         break;
                     default:
                         setError("Something went wrong")
@@ -100,7 +110,7 @@ const GuessingGame = () => {
     }
 
     useEffect(() => {
-        getPokedex()
+        getWholePokedex()
             .then((response) => {
                 if (response.status === 200) {
                     //console.log(response);
@@ -119,7 +129,10 @@ const GuessingGame = () => {
                 {gameStarted ?
                     (
                         <Card style={{ width: '60%' }} className="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                            <p>Pokedex progression: {numOfCaughtPokemon}/151 | New pokemon collected: {numOfNewelyCaughtPokemon}</p>
+                            <div className="d-flex justify-content-between">
+                                <p>Pokedex progression: {numOfCaughtPokemon}/151 | New pokemon collected: {numOfNewelyCaughtPokemon}</p>
+                                <p className={`${guessesLeft===0 && "text-danger"}`}>Guesses left: { guessesLeft }</p>
+                            </div>
                             {pokemon?.image ?
                                 (<Card.Img variant="top" src={pokemon.image} className="h-60 w-50 mx-auto" />)
                                 :
@@ -130,7 +143,7 @@ const GuessingGame = () => {
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Control
                                             type="userGuess"
-                                            placeholder={error === "Required" ? "Name is required..." : "Take a guess..."}
+                                            placeholder={requiredError ? "Name is required..." : "Take a guess..."}
                                             onChange={(e) => setUserGuess(e.target.value)}
                                             className={isCorrect ? "border border-success" : "border border-danger"} />
                                     </Form.Group>
