@@ -22,6 +22,7 @@ function HomePage() {
                         <Accordion.Body>
                             <ListGroup className="list-group-flush">
                                 <ListGroup.Item>Guess the pokemon and add it to your pokedex</ListGroup.Item>
+                                <ListGroup.Item>You have 3 chances to get each pokemon</ListGroup.Item>
                                 <ListGroup.Item>Search pokemon you have collected</ListGroup.Item>
                                 <ListGroup.Item>Account must be created in order to play the game</ListGroup.Item>
                             </ListGroup>

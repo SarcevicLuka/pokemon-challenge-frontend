@@ -31,7 +31,7 @@ const PokedexFilter = ({setFilterParams, handleFilter, setPage}: PokedexFilterPr
 
     return (<>
         <div className="container mt-3">
-            <Form className="d-flex">
+            <Form className="d-flex flex-column flex-sm-column flex-md-row">
                 <Form.Control
                     type="search"
                     placeholder="Type in a name to filter..."
@@ -47,7 +47,7 @@ const PokedexFilter = ({setFilterParams, handleFilter, setPage}: PokedexFilterPr
                     <DropdownButton as={ButtonGroup} title={`Per page: ${perPage}`} id="perPage-dropdown">
                         <Dropdown.Item eventKey="1" onClick={() => setPetPage(8)}>8</Dropdown.Item>
                         <Dropdown.Item eventKey="2" onClick={() => setPetPage(16)}>16</Dropdown.Item>
-                        <Dropdown.Item eventKey="2" onClick={() => setPetPage(24)}>24</Dropdown.Item>
+                        <Dropdown.Item eventKey="3" onClick={() => setPetPage(24)}>24</Dropdown.Item>
                     </DropdownButton>
                     <Button variant="outline-primary" onClick={onhandleFilter}>Search</Button>
                 </ButtonGroup>

@@ -130,7 +130,7 @@ const GuessingGame = () => {
                             className="shadow-lg p-3 mb-5 bg-body-tertiary rounded"
                         >
                             <div className="d-flex justify-content-between">
-                                <p>Pokedex progression: {numOfCaughtPokemon}/151 | New pokemon collected: {numOfNewelyCaughtPokemon}</p>
+                                <p>Progression: {numOfCaughtPokemon}/151 | Collected: {numOfNewelyCaughtPokemon}</p>
                                 <p className={`${guessesLeft===0 && "text-danger"}`}>Guesses left: { guessesLeft }</p>
                             </div>
                             {pokemon?.image ?

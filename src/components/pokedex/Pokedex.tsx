@@ -1,8 +1,7 @@
-import { Button, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { getPaginatedPokedex } from "../../api/pokedex/apiCalls";
 import PokedexFilter from "./PokedexFilter";
 import { useState, useEffect } from "react";
-import PokemonCard from "./PokemonCard";
 import { PokedexPokemon } from "../../api/types";
 import Loader from "../Loader";
 import RightArrow from "../../public/RightArrow";
@@ -10,6 +9,7 @@ import LeftArrow from "../../public/LeftArrow";
 import { AvailableRoutes } from "../../routes/AvailableRoutes";
 import { useNavigate } from "react-router-dom";
 import ErrorToast from "../ErrorToast";
+import PokemonGrid from "./PokemonGrid";
 
 const Pokedex = () => {
     const initialFilterState = "?page=1&perPage=8&sort=ASC";
@@ -72,20 +72,8 @@ const Pokedex = () => {
             setPage={setPage} 
         />
 
-        {isSubmitting ?
-            (
-                <Loader />
-            )
-            :
-            (
-                <Row xs={1} md={3} lg={4} xxl={5} className="g-4 m-3">
-                    {paginatedPokemon.map((pokemon, idx) => (
-                        <PokemonCard idx={idx} key={pokemon.id} pokemon={pokemon} />
-                    ))}
-                </Row>
-
-            )
-        }
+        { isSubmitting ? <Loader /> : <PokemonGrid paginatedPokemon={paginatedPokemon} /> }
+        
         <div className="d-flex justify-content-center">
             <Button
                 className="m-2"
