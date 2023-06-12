@@ -1,6 +1,6 @@
 import axios from "axios"
 import createAxiosConfig from "../createAxiosConfig";
-import { TakeGuessProps } from "../types";
+import { TakeGuessProps } from "./types";
 
 const getGuessingGamePokemon = async () => {
     return axios.get("http://127.0.0.1:8080/guessing-game/guess", createAxiosConfig());

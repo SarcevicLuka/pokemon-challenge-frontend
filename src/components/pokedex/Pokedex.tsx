@@ -1,4 +1,4 @@
-import { Badge, Button, Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { getPaginatedPokedex } from "../../api/pokedex/apiCalls";
 import PokedexFilter from "./PokedexFilter";
 import { useState, useEffect } from "react";
@@ -22,7 +22,7 @@ const Pokedex = () => {
     const [error, setError] = useState<string>("");
     const navigation = useNavigate();
 
-    const handleFilter = async (filterParams: URLSearchParams) => {
+    const handleFilter = async (filterParams: URLSearchParams): Promise<void> => {
         setIsSubmitting(true);
 
         await getPaginatedPokedex(filterParams)

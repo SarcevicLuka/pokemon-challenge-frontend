@@ -2,14 +2,18 @@ import { Container, Modal } from "react-bootstrap";
 import { AvailableRoutes } from "../../routes/AvailableRoutes";
 
 interface ModalProps {
-    show: boolean,
-    caughtPokemon: number,
-    onHide: () => void
+    show: boolean;
+    caughtPokemon: number;
+    onHide: () => void;
 }
 
 const FinishGameModal = ({ show, caughtPokemon, onHide }: ModalProps) => {
     return (<>
-        <Modal show={show} onHide={onHide} aria-labelledby="contained-modal-title-vcenter">
+        <Modal 
+            show={show} 
+            onHide={onHide} 
+            aria-labelledby="contained-modal-title-vcenter"
+        >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Game finished...see your cought pokemon
@@ -27,20 +31,16 @@ const FinishGameModal = ({ show, caughtPokemon, onHide }: ModalProps) => {
                         :
                         (
                             <>
-                                <p>
-                                    Congrats, you collected {caughtPokemon} Pokemon.
-                                </p>
+                                <p>Congrats, you collected {caughtPokemon} Pokemon.</p>
                                 <p>
                                     Go to your <a href={AvailableRoutes.Home}>pokedex</a> to see newely caught Pokemon
                                 </p>
                             </>
                         )
                     }
-
-
                 </Container>
             </Modal.Body>
-        </Modal >
+        </Modal>
     </>)
 }
 

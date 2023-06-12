@@ -12,7 +12,7 @@ const PokedexFilter = ({setFilterParams, handleFilter, setPage}: PokedexFilterPr
     const [perPage, setPetPage] = useState<number>(8);
     const [searchTerm, setSearchTerm] = useState<string | null>("");
 
-    const onhandleFilter = async () => {
+    const onhandleFilter = async (): Promise<void> => {
         const filterParams = new URLSearchParams();
 
         setPage(1)

@@ -29,9 +29,9 @@ const GuessingGame = () => {
 
     const navigation = useNavigate();
 
-    const getPokemon = () => {
+    const getPokemon = async (): Promise<void> => {
         setIsSubmitting(true);
-        getGuessingGamePokemon()
+        await getGuessingGamePokemon()
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data)
@@ -56,10 +56,10 @@ const GuessingGame = () => {
             .finally(() => setIsSubmitting(false))
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (): Promise<void> => {
         setIsSubmitting(true);
 
-        takeAGuess({
+        await takeAGuess({
             guessId: pokemon?.guessId,
             usersGuess: {
                 guessName: userGuess
@@ -74,11 +74,9 @@ const GuessingGame = () => {
                     setGuessesLeft(2);
                 } else {
                     if (guessesLeft > 0) {
-                        console.log(guessesLeft);
                         setIsCorrect(false);
                         setGuessesLeft(prev => prev - 1)
                     } else {
-                        console.log(guessesLeft);
                         getPokemon();
                         setGuessesLeft(2);
                     }
@@ -113,7 +111,6 @@ const GuessingGame = () => {
         getWholePokedex()
             .then((response) => {
                 if (response.status === 200) {
-                    //console.log(response);
                     setNumOfCaughtPokemon(response.data.data.length);
                 }
             })
@@ -128,13 +125,20 @@ const GuessingGame = () => {
             <div className="d-flex justify-content-center mt-5">
                 {gameStarted ?
                     (
-                        <Card style={{ width: '60%' }} className="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                        <Card 
+                            style={{ width: '60%' }} 
+                            className="shadow-lg p-3 mb-5 bg-body-tertiary rounded"
+                        >
                             <div className="d-flex justify-content-between">
                                 <p>Pokedex progression: {numOfCaughtPokemon}/151 | New pokemon collected: {numOfNewelyCaughtPokemon}</p>
                                 <p className={`${guessesLeft===0 && "text-danger"}`}>Guesses left: { guessesLeft }</p>
                             </div>
                             {pokemon?.image ?
-                                (<Card.Img variant="top" src={pokemon.image} className="h-60 w-50 mx-auto" />)
+                                (<Card.Img 
+                                    variant="top" 
+                                    src={pokemon.image} 
+                                    className="h-60 w-50 mx-auto" 
+                                />)
                                 :
                                 (<Loader />)
                             }
@@ -149,13 +153,25 @@ const GuessingGame = () => {
                                     </Form.Group>
                                     {!isCorrect && <p className="text-danger">Incorrect</p>}
                                     <div className="d-flex justify-content-around">
-                                        <Button variant="primary" onClick={handleSubmit} disabled={isSubmitting}>
+                                        <Button 
+                                            variant="primary" 
+                                            onClick={handleSubmit} 
+                                            disabled={isSubmitting}
+                                        >
                                             Take a guess
                                         </Button>
-                                        <Button variant="outline-warning" onClick={getPokemon} disabled={isSubmitting}>
+                                        <Button 
+                                            variant="outline-warning" 
+                                            onClick={getPokemon} 
+                                            disabled={isSubmitting}
+                                        >
                                             Skip
                                         </Button>
-                                        <Button variant="outline-danger" onClick={handleFinish} disabled={isSubmitting}>
+                                        <Button 
+                                            variant="outline-danger" 
+                                            onClick={handleFinish} 
+                                            disabled={isSubmitting}
+                                        >
                                             Finish
                                         </Button>
                                     </div>
@@ -165,8 +181,15 @@ const GuessingGame = () => {
                     )
                     :
                     (
-                        <Card style={{ width: '60%' }} className="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                            <Card.Img variant="top" src={guessThePokemon} className="h-60 w-50 mx-auto" />
+                        <Card 
+                            style={{ width: '60%' }} 
+                            className="shadow-lg p-3 mb-5 bg-body-tertiary rounded"
+                        >
+                            <Card.Img 
+                                variant="top" 
+                                src={guessThePokemon} 
+                                className="h-60 w-50 mx-auto" 
+                            />
                             <Card.Body className="d-flex justify-content-center">
                                 <Form style={{ width: '80%' }}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -189,7 +212,12 @@ const GuessingGame = () => {
                     )
                 }
             </div>
-            <FinishGameModal show={modalShow} caughtPokemon={numOfNewelyCaughtPokemon} onHide={() => setModalShow(false)} />
+
+            <FinishGameModal 
+                show={modalShow} 
+                caughtPokemon={numOfNewelyCaughtPokemon} 
+                onHide={() => setModalShow(false)} 
+            />
         </>
     )
 }
