@@ -54,3 +54,7 @@ a {
     text-decoration: none!important;
     cursor: pointer;
 }
+
+.row {
+    --bs-gutter-x: 0 rem!important
+}
