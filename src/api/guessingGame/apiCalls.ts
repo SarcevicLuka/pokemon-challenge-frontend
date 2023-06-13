@@ -3,11 +3,11 @@ import createAxiosConfig from "../createAxiosConfig";
 import { TakeGuessProps } from "./types";
 
 const getGuessingGamePokemon = async () => {
-    return axios.get("http://127.0.0.1:8080/guessing-game/guess", createAxiosConfig());
+    return axios.get("guessing-game/guess", createAxiosConfig());
 }
 
 const takeAGuess = async (guess: TakeGuessProps) => {
-    return axios.post(`http://127.0.0.1:8080/guessing-game/guess/${guess.guessId}`, guess.usersGuess, createAxiosConfig());
+    return axios.post(`guessing-game/guess/${guess.guessId}`, guess.usersGuess, createAxiosConfig());
 }
 
 export { getGuessingGamePokemon, takeAGuess };
