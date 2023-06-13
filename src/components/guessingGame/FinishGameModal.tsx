@@ -33,7 +33,7 @@ const FinishGameModal = ({ show, caughtPokemon, onHide }: ModalProps) => {
                             <>
                                 <p>Congrats, you collected {caughtPokemon} Pokemon.</p>
                                 <p>
-                                    Go to your <a href={AvailableRoutes.Home}>pokedex</a> to see newely caught Pokemon
+                                    Go to your <a href={AvailableRoutes.Pokedex}>pokedex</a> to see newely caught Pokemon
                                 </p>
                             </>
                         )

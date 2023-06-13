@@ -10,7 +10,8 @@ function HomePage() {
     return (<>
         <Navigation />
         { token && <PlayButton /> }
-        <div className="row justify-content-md-center text-center">
+        <div className="d-flex justify-content-md-center text-center"
+        >
             <Card style={{ width: '70%' }} className="my-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                 <Card.Body>
                     <Card.Title>Guess The Pokemon</Card.Title>
