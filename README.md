@@ -2,6 +2,7 @@
 
 This is the frontend part of the Pokemon challenge game application.
 The application is built in ReactTS with Axios for api fetching.
+For the reactive functionality and components Bootstrap is used.
 Application is build with **Vite** build tool.
 
 # Table of contents
