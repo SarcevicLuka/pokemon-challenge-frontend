@@ -19,6 +19,7 @@ const GuessingGame = () => {
     const [modalShow, setModalShow] = useState(false);
     const [pokemon, setPokemon] = useState<GuessingGamePokemon>();
     const [userGuess, setUserGuess] = useState<string>("");
+    const [verdict, setVerdict] = useState<string>("");
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isCorrect, setIsCorrect] = useState<boolean>(true);
     const [numOfCaughtPokemon, setNumOfCaughtPokemon] = useState<number>(0);
@@ -67,6 +68,7 @@ const GuessingGame = () => {
         })
             .then((response) => {
                 if (response.status == 200 && response.data.verdict === "correct") {
+                    setUserGuess("");
                     setIsCorrect(true);
                     setNumOfCaughtPokemon(numOfCaughtPokemon + 1)
                     setNumOfNewelyCaughtPokemon(numOfNewelyCaughtPokemon + 1)
@@ -81,6 +83,10 @@ const GuessingGame = () => {
                         setGuessesLeft(2);
                     }
                 }
+                setVerdict(response.data.verdict);
+                setTimeout(() => {
+                    setVerdict("");
+                }, 1000);
             })
             .catch((error) => {
                 switch (error.response.status) {
@@ -147,11 +153,12 @@ const GuessingGame = () => {
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Control
                                             type="userGuess"
+                                            value={userGuess}
                                             placeholder={requiredError ? "Name is required..." : "Take a guess..."}
                                             onChange={(e) => setUserGuess(e.target.value)}
                                             className={isCorrect ? "border border-success" : "border border-danger"} />
                                     </Form.Group>
-                                    {!isCorrect && <p className="text-danger">Incorrect</p>}
+                                    {verdict && <p>{ verdict.toLocaleUpperCase() }</p>}
                                     <div className="d-flex justify-content-around">
                                         <Button 
                                             variant="primary" 
